@@ -1,0 +1,30 @@
+---
+title: "Superficie forestal y salud mental en España"
+output: html_document
+date: "2026-10-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+
+## Objetivo general
+
+
+## Objetivos específicos
+
+
+## Metodología y resultados
+
+
+## Conclusiones generales
+
+
+## Referencias
+
+
+
+
