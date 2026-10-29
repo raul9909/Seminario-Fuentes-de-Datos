@@ -1,10 +1,24 @@
-# Superficie forestal y salud mental en España
 
-### Análisis de la relación entre la superficie forestal y la morbilidad psíquica por comunidades autónomas
+<div align="center">
 
+<sub><b>UNIVERSIDAD DE BURGOS · INGENIERÍA DE LA SALUD</b></sub>
 
-## Autores
-Raúl Mozo · Mohamed Lambarki · Diego Tobes
+<h1>Superficie forestal y salud mental en España</h1>
+
+<p>&nbsp;</p>
+
+<h4>Análisis de la relación entre la superficie forestal y la morbilidad psíquica por comunidades autónomas</h4>
+
+<p>&nbsp;</p>
+
+<img src="OUTPUT/Paisaje%20forestal.png" alt="Paisaje forestal" width="100%">
+
+<p>&nbsp;</p>
+
+<h4>Raúl Mozo · Mohamed Lambarki · Diego Tobes</h4>
+
+</div>
+
 
 
 ## Introducción
