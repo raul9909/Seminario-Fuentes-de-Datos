@@ -1,5 +1,5 @@
 ---
-title: "Superficie forestal y salud mental en España"
+title: "Superficie forestal y trastornos mentales en las Comunidades Autónomas de España"
 output: html_document
 date: "2026-10-24"
 ---
@@ -9,21 +9,48 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introducción
-Los trastornos mentales representan uno de los principales problemas de salud pública en España. Diversos estudios sugieren que la exposición a espacios naturales puede tener efectos beneficiosos sobre la salud mental, reduciendo los niveles de estrés, ansiedad y otros problemas psicológicos.
-España presenta importantes diferencias territoriales en cuanto a superficie forestal y características ambientales. Estas diferencias ofrecen una oportunidad para analizar si existe una relación entre la disponibilidad de espacios naturales y la prevalencia de trastornos mentales diagnosticados.
-Este seminario explora la posible asociación entre la superficie forestal de las Comunidades Autónomas españolas y el porcentaje de población con diagnóstico de trastorno mental, considerando además las diferencias entre hombres y mujeres.
+Los trastornos mentales constituyen uno de los principales retos de salud pública en la actualidad. Problemas como la depresión, la ansiedad y otros trastornos psicológicos afectan a millones de personas en todo el mundo, generando consecuencias importantes tanto a nivel individual como social. La aparición de estos trastornos depende de múltiples factores biológicos, sociales, económicos y ambientales, por lo que su estudio requiere un enfoque multidisciplinar.
+
+En los últimos años ha aumentado el interés científico por comprender la influencia que los espacios naturales pueden ejercer sobre la salud mental. Diversas investigaciones sugieren que la exposición frecuente a entornos naturales puede contribuir a la reducción de los niveles de estrés, mejorar la capacidad de recuperación psicológica y favorecer el bienestar general de la población. Entre los posibles mecanismos implicados destacan la disminución de la exposición a factores estresantes propios de los entornos urbanos, la mejora de la calidad ambiental y la promoción de estilos de vida más saludables.
+
+España presenta una gran diversidad territorial en cuanto a la distribución de espacios naturales. Algunas Comunidades Autónomas poseen una elevada proporción de superficie forestal, mientras que otras cuentan con una presencia considerablemente menor de este tipo de ecosistemas. Estas diferencias ofrecen una oportunidad interesante para analizar si existe alguna asociación entre la disponibilidad de espacios naturales y determinados indicadores relacionados con la salud mental.
+
+En este contexto, el presente trabajo tiene como finalidad estudiar la posible relación entre el porcentaje de superficie forestal de las Comunidades Autónomas españolas y la prevalencia de diagnóstico de trastorno mental a lo largo de la vida. Además, se analizarán las diferencias observadas entre hombres y mujeres con el objetivo de determinar si el sexo puede influir en los patrones detectados. Mediante el uso de datos procedentes de fuentes oficiales, se pretende explorar si una mayor disponibilidad de espacios forestales podría estar asociada con una menor prevalencia de trastornos mentales en la población española.
 
 
-## Objetivo general
-Investigar la posible asociación entre la superficie forestal de las Comunidades Autónomas españolas y la prevalencia de diagnóstico de trastorno mental, evaluando si los territorios con una mayor presencia de espacios naturales presentan mejores resultados en salud mental. Además, se analizarán las diferencias entre hombres y mujeres con el fin de determinar si el sexo puede influir en los patrones observados.
-Prueba Git
-## Objetivos específicos
+## Objetivos
+
+### Objetivo General
+
+Investigar la posible asociación entre el porcentaje de superficie forestal y la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas de España, con el fin de analizar si una mayor presencia de espacios naturales puede estar relacionada con mejores indicadores de salud mental. Asimismo, se evaluarán las diferencias observadas entre hombres y mujeres para determinar si el sexo influye en los patrones identificados y en la distribución territorial de los trastornos mentales.
 
 
-## Metodología y resultados
+### Objetivos Específicos
 
+- Describir la distribución de la superficie forestal en las Comunidades Autónomas de España.
 
-## Conclusiones generales
+- Analizar la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas españolas.
+
+- Comparar las diferencias observadas entre hombres y mujeres en relación con el diagnóstico de trastorno mental.
+
+- Estudiar la posible relación entre la superficie forestal y la prevalencia de trastorno mental.
+
+- Identificar patrones territoriales y posibles excepciones a la tendencia observada.
+
+## Metodología :
+
+### Fuentes de datos
+### Obtención de los datos
+### Preparación y tratamiento de los datos
+
+## Resultados:
+
+### Distribución de la superficie forestal
+### Distribución del diagnóstico de trastorno mental
+### Diferencias entre hombres y mujeres
+### Relación entre superficie forestal y diagnóstico de trastorno mental
+
+## Conclusiones 
 
 
 ## Referencias
