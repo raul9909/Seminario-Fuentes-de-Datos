@@ -9,11 +9,14 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Introducción
+Los trastornos mentales representan uno de los principales problemas de salud pública en España. Diversos estudios sugieren que la exposición a espacios naturales puede tener efectos beneficiosos sobre la salud mental, reduciendo los niveles de estrés, ansiedad y otros problemas psicológicos.
+España presenta importantes diferencias territoriales en cuanto a superficie forestal y características ambientales. Estas diferencias ofrecen una oportunidad para analizar si existe una relación entre la disponibilidad de espacios naturales y la prevalencia de trastornos mentales diagnosticados.
+Este seminario explora la posible asociación entre la superficie forestal de las Comunidades Autónomas españolas y el porcentaje de población con diagnóstico de trastorno mental, considerando además las diferencias entre hombres y mujeres.
 
 
 ## Objetivo general
-
-
+Investigar la posible asociación entre la superficie forestal de las Comunidades Autónomas españolas y la prevalencia de diagnóstico de trastorno mental, evaluando si los territorios con una mayor presencia de espacios naturales presentan mejores resultados en salud mental. Además, se analizarán las diferencias entre hombres y mujeres con el fin de determinar si el sexo puede influir en los patrones observados.
+Prueba Git
 ## Objetivos específicos
 
 
