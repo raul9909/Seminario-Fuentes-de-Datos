@@ -35,18 +35,31 @@ Describir la distribución de la superficie forestal en las Comunidades Autónom
 
 - Identificar patrones territoriales y posibles excepciones a la tendencia observada.
 
-## Metodología:
+## Metodología
 
 ### Fuentes de datos
 ### Obtención de los datos
 ### Preparación y tratamiento de los datos
 
-## Resultados:
+## Resultados
 
 ### Distribución de la superficie forestal
-### Distribución del diagnóstico de trastorno mental
-### Diferencias entre hombres y mujeres
-### Relación entre superficie forestal y diagnóstico de trastorno mental
+
+En primer lugar, vamos a analizar la distribución de la superficie forestal en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales existentes. Para ello, se representarán gráficamente los datos de superficie forestal, permitiendo comparar los valores registrados en cada comunidad autónoma.
+
+
+### Prevalencia de transtornos mentales por comunidades autónomas
+
+A continuación, se analiza la prevalencia de trastornos mentales en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales y entre sexos. Para ello, se representarán gráficamente los datos disponibles, permitiendo comparar los valores registrados en cada comunidad autónoma y observar las posibles diferencias entre hombres y mujeres.
+
+### Relación entre superficie forestal y salud mental
+
+Posteriormente, se estudia la posible relación entre la superficie forestal y la prevalencia de trastornos mentales en las comunidades autónomas de España, con el objetivo de determinar si existe alguna asociación entre ambas variables. Para ello, se compararán gráficamente los datos obtenidos, permitiendo identificar posibles tendencias y analizar si una mayor superficie forestal se relaciona con una mayor o menor prevalencia de trastornos mentales.
+
+### Patrones territoriales y posibles excepciones
+
+Por último, se examinan los patrones territoriales observados en la relación entre la superficie forestal y la prevalencia de trastornos mentales, con el objetivo de identificar posibles excepciones a la tendencia general. Para ello, se analizarán las diferencias entre comunidades autónomas, prestando especial atención a aquellas que presenten valores alejados del comportamiento observado en el conjunto de los datos.
+
 
 ## Conclusiones 
 
