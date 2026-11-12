@@ -47,6 +47,50 @@ Describir la distribución de la superficie forestal en las Comunidades Autónom
 
 En primer lugar, vamos a analizar la distribución de la superficie forestal en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales existentes. Para ello, se representarán gráficamente los datos de superficie forestal, permitiendo comparar los valores registrados en cada comunidad autónoma.
 
+```{r}
+library(dplyr)
+
+forestal_2021 <- Superficie_forestal_ %>%
+  slice(3:21) %>%
+  rename(
+    comunidad = ...1,
+    superficie_forestal = ...2
+  )
+
+forestal_2021 <- forestal_2021 %>%
+  mutate(comunidad = sub("^[0-9]+ ", "", comunidad))
+
+library(sf)
+library(ggplot2)
+
+library(geodata)
+
+mapa_espana <- geodata::gadm(
+  country = "ESP",
+  level = 1,
+  path = "INPUT/DATA"
+)
+
+mapa_espana <- sf::st_as_sf(mapa_espana)
+
+forestal_2021 <- forestal_2021 %>%
+  mutate(nombre_mapa = case_when(
+    comunidad == "Asturias, Principado de" ~ "Principado de Asturias",
+    comunidad == "Balears, Illes" ~ "Islas Baleares",
+    comunidad == "Canarias" ~ "Islas Canarias",
+    comunidad == "Castilla - La Mancha" ~ "Castilla-La Mancha",
+    comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+    comunidad == "Madrid, Comunidad de" ~ "Comunidad de Madrid",
+    comunidad == "Murcia, Región de" ~ "Región de Murcia",
+    comunidad == "Navarra, Comunidad Foral de" ~ "Comunidad Foral de Navarra",
+    comunidad == "Rioja, La" ~ "La Rioja",
+    comunidad == "Ceuta" ~ "Ceuta y Melilla",
+    comunidad == "Melilla" ~ "Ceuta y Melilla",
+    TRUE ~ comunidad
+  ))
+```
+
+
 
 ### Prevalencia de transtornos mentales por comunidades autónomas
 
