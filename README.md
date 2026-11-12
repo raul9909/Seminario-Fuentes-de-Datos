@@ -5,7 +5,6 @@
 
 <h1>Superficie forestal y salud mental en España</h1>
 
-<p>&nbsp;</p>
 
 <h4>Análisis de la relación entre la superficie forestal y la morbilidad psíquica por comunidades autónomas</h4>
 
@@ -19,7 +18,7 @@
 
 </div>
 
-
+<p>&nbsp;</p>
 
 ## Introducción
 
