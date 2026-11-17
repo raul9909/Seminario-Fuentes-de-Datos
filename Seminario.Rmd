@@ -38,8 +38,83 @@ Describir la distribución de la superficie forestal en las Comunidades Autónom
 ## Metodología
 
 ### Fuentes de datos
+
+Para el desarrollo de este estudio se han utilizado dos fuentes principales de información, ambas relacionadas con el ámbito medioambiental y la salud pública en España. La combinación de estos conjuntos de datos permite explorar posibles asociaciones entre las características ambientales de las Comunidades Autónomas y determinados indicadores de salud mental, considerando también las diferencias existentes entre hombres y mujeres.
+
+#### Datos sobre superficie forestal
+
+La información medioambiental se ha obtenido del **Instituto Nacional de Estadística (INE)**, concretamente del indicador *«Superficie forestal como porcentaje de la superficie total, por comunidades autónomas»*, correspondiente a los indicadores de seguimiento de los Objetivos de Desarrollo Sostenible (ODS).
+
+Este indicador expresa el porcentaje del territorio de cada Comunidad Autónoma ocupado por superficie forestal respecto a su superficie total. Se utilizará como medida de caracterización ambiental para comparar la presencia de áreas forestales entre los distintos territorios españoles.
+
+#### Datos sobre salud mental
+
+Los datos sanitarios proceden del estudio *«Salud mental en España y diferencias por sexo y por comunidades autónomas»*, basado en los resultados de la **Encuesta Nacional de Salud de España de 2017**.
+
+Para este trabajo se ha seleccionado el indicador de diagnóstico de trastorno mental a lo largo de la vida, expresado como porcentaje de población. Esta variable permite estudiar la distribución territorial de las personas que declaran haber recibido un diagnóstico de trastorno mental por parte de un profesional sanitario.
+
+Además, los resultados se encuentran desagregados por sexo, diferenciando entre hombres y mujeres. Esta clasificación permitirá examinar las posibles diferencias entre ambos grupos y explorar si los patrones territoriales observados presentan comportamientos distintos según el sexo.
+
+La utilización conjunta de ambas fuentes proporciona una base de datos que permite estudiar la posible asociación entre la superficie forestal y la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas españolas.
 ### Obtención de los datos
+
+Una vez identificadas las fuentes de información necesarias para el estudio, se procedió a la recopilación de los conjuntos de datos correspondientes a las variables medioambientales y sanitarias.
+
+#### Datos de superficie forestal
+
+Los datos relativos a la superficie forestal se descargaron en formato Excel desde el portal estadístico del Instituto Nacional de Estadística (INE). El archivo contiene el indicador de superficie forestal como porcentaje de la superficie total, desglosado por Comunidades Autónomas y presentado para diferentes años.
+
+Para este estudio se seleccionaron los registros correspondientes al año 2018, que incluyen las distintas Comunidades Autónomas y Ciudades Autónomas españolas. Posteriormente, se utilizaron las funciones del paquete `readxl` para importar el archivo en R y acceder a la información necesaria para el análisis.
+
+#### Datos de diagnóstico de trastorno mental
+
+La información sanitaria se obtuvo de la publicación científica basada en la Encuesta Nacional de Salud de España de 2017, disponible en formato PDF.
+
+A partir de las tablas incluidas en dicha publicación, se extrajeron los porcentajes correspondientes al diagnóstico de trastorno mental a lo largo de la vida, diferenciados por Comunidad Autónoma y sexo. Se recopilaron tanto los valores totales como los correspondientes a hombres y mujeres, con el propósito de conservar todas las dimensiones necesarias para el estudio.
+
+Debido a que esta información se encontraba presentada en formato tabular dentro de un documento PDF, fue necesario realizar una extracción de los valores y organizarlos posteriormente en una estructura tabular que permitiera su procesamiento mediante R.
+
+#### Organización inicial de los datos
+
+Una vez recopilada la información de ambas fuentes, los datos se organizaron en conjuntos independientes, manteniendo inicialmente la estructura original de cada fuente.
+
+Esta organización permitió disponer de dos tablas diferenciadas: una correspondiente a los indicadores de superficie forestal y otra relativa a los indicadores de salud mental. Ambas servirán como base para los posteriores procesos de exploración, limpieza, transformación e integración de los datos.
 ### Preparación y tratamiento de los datos
+#### Exploración inicial de los conjuntos de datos
+```{r message=FALSE, warning=FALSE}
+library(readxl)
+library(tidyverse)
+library(pdftools)
+```
+
+```{r}
+# Importación de los datos de superficie forestal
+
+Superficie_forestal <- read_excel(
+  "INPUT/DATA/Superficie Forestal (%).xlsx",
+  sheet = "tabla-68563"
+)
+
+# Exploración inicial
+head(Superficie_forestal)
+
+str(Superficie_forestal)
+
+summary(Superficie_forestal)
+
+dim(Superficie_forestal)
+```
+```{r}
+# Importación del documento PDF
+
+salud_pdf <- pdf_text("INPUT/DATA/Trastorno Mental.pdf")
+
+# Información general del documento
+length(salud_pdf)
+
+# Exploración de la página que contiene la Tabla 2
+cat(salud_pdf[[5]])
+```
 
 ## Resultados
 
