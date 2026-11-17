@@ -38,8 +38,103 @@ Describir la distribución de la superficie forestal en las Comunidades Autónom
 ## Metodología
 
 ### Fuentes de datos
+
 ### Obtención de los datos
+
 ### Preparación y tratamiento de los datos
+
+#### Cargamos las librerías
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+#### Importamos los datos de superficie forestal
+```{r}
+Superficie_forestal <- read_excel(
+  "INPUT/DATA/Superficie Forestal (%).xlsx",
+  skip = 28,
+  col_names = FALSE
+)
+```
+
+#### Seleccionamos las comunidades autónomas
+```{r}
+forestal_2018 <- Superficie_forestal %>%
+  slice(2:20) %>%
+  select(1:2) %>%
+  rename(
+    comunidad = ...1,
+    superficie_forestal = ...2
+  )
+```
+
+#### Limpiamos los nombres de las comunidades
+```{r}
+forestal_2018 <- forestal_2018 %>%
+  mutate(
+    comunidad = trimws(comunidad),
+    comunidad = sub("^[0-9]+ ", "", comunidad),
+    superficie_forestal = as.numeric(superficie_forestal)
+  )
+```
+
+#### Comprobamos el resultado
+```{r}
+forestal_2018
+```
+
+
+#### Obtenemos los datos geográficos de España
+```{r}
+library(sf)
+library(geodata)
+
+mapa_espana <- geodata::gadm(
+  country = "ESP",
+  level = 1,
+  path = "INPUT/DATA"
+)
+
+mapa_espana <- sf::st_as_sf(mapa_espana)
+```
+#### Comprobamos los nombres de las comunidades autónomas
+```{r}
+unique(mapa_espana$NAME_1)
+```
+
+#### Adaptamos los nombres de las comunidades autónomas
+```{r}
+forestal_2018 <- forestal_2018 %>%
+  mutate(nombre_mapa = case_when(
+    comunidad == "Asturias, Principado de" ~ "Principado de Asturias",
+    comunidad == "Balears, Illes" ~ "Islas Baleares",
+    comunidad == "Canarias" ~ "Islas Canarias",
+    comunidad == "Castilla - La Mancha" ~ "Castilla-La Mancha",
+    comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+    comunidad == "Madrid, Comunidad de" ~ "Comunidad de Madrid",
+    comunidad == "Murcia, Región de" ~ "Región de Murcia",
+    comunidad == "Navarra, Comunidad Foral de" ~ "Comunidad Foral de Navarra",
+    comunidad == "Rioja, La" ~ "La Rioja",
+    comunidad == "Ceuta" ~ "Ceuta y Melilla",
+    comunidad == "Melilla" ~ "Ceuta y Melilla",
+    TRUE ~ comunidad
+  ))
+```
+
+#### Unimos los datos forestales con los datos geográficos
+```{r}
+mapa_final <- mapa_espana %>%
+  left_join(forestal_2018, by = c("NAME_1" = "nombre_mapa"))
+```
+
+#### Comprobamos la unión de los datos
+```{r}
+mapa_final %>%
+  st_drop_geometry() %>%
+  select(NAME_1, superficie_forestal)
+```
+
 
 ## Resultados
 
