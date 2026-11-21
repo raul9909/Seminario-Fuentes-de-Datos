@@ -80,20 +80,25 @@ Debido a que esta información se encontraba presentada en formato tabular dentr
 Una vez recopilada la información de ambas fuentes, los datos se organizaron en conjuntos independientes, manteniendo inicialmente la estructura original de cada fuente.
 
 Esta organización permitió disponer de dos tablas diferenciadas: una correspondiente a los indicadores de superficie forestal y otra relativa a los indicadores de salud mental. Ambas servirán como base para los posteriores procesos de exploración, limpieza, transformación e integración de los datos.
+
+
 ### Preparación y tratamiento de los datos
-#### Exploración inicial de los conjuntos de datos
-```{r message=FALSE, warning=FALSE}
-library(readxl)
+
+#### Cargamos las librerías
+```{r}
 library(tidyverse)
+library(readxl)
 library(pdftools)
 ```
 
-```{r}
-# Importación de los datos de superficie forestal
 
+#### Importamos los datos de superficie forestal
+
+```{r}
 Superficie_forestal <- read_excel(
   "INPUT/DATA/Superficie Forestal (%).xlsx",
-  sheet = "tabla-68563"
+  skip = 28,
+  col_names = FALSE
 )
 
 # Exploración inicial
@@ -104,32 +109,6 @@ str(Superficie_forestal)
 summary(Superficie_forestal)
 
 dim(Superficie_forestal)
-```
-```{r}
-# Importación del documento PDF
-
-salud_pdf <- pdf_text("INPUT/DATA/Trastorno Mental.pdf")
-
-# Información general del documento
-length(salud_pdf)
-
-# Exploración de la página que contiene la Tabla 2
-cat(salud_pdf[[5]])
-```
-
-#### Cargamos las librerías
-```{r}
-library(tidyverse)
-library(readxl)
-```
-
-#### Importamos los datos de superficie forestal
-```{r}
-Superficie_forestal <- read_excel(
-  "INPUT/DATA/Superficie Forestal (%).xlsx",
-  skip = 28,
-  col_names = FALSE
-)
 ```
 
 #### Seleccionamos las comunidades autónomas
@@ -210,6 +189,19 @@ mapa_final %>%
 ```
 
 
+#### Importamos los datos de Transtorno mental
+
+```{r}
+
+Transtorno_mental_pdf <- pdf_text("INPUT/DATA/Transtorno Mental.pdf")
+
+# Exploración inicial
+length(Transtorno_mental_pdf)
+
+cat(Transtorno_mental_pdf[[5]])
+```
+
+
 ## Resultados
 
 ### Distribución de la superficie forestal
@@ -217,48 +209,22 @@ mapa_final %>%
 En primer lugar, vamos a analizar la distribución de la superficie forestal en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales existentes. Para ello, se representarán gráficamente los datos de superficie forestal, permitiendo comparar los valores registrados en cada comunidad autónoma.
 
 ```{r}
-library(dplyr)
-
-forestal_2021 <- Superficie_forestal_ %>%
-  slice(3:21) %>%
-  rename(
-    comunidad = ...1,
-    superficie_forestal = ...2
-  )
-
-forestal_2021 <- forestal_2021 %>%
-  mutate(comunidad = sub("^[0-9]+ ", "", comunidad))
-
-library(sf)
 library(ggplot2)
 
-library(geodata)
-
-mapa_espana <- geodata::gadm(
-  country = "ESP",
-  level = 1,
-  path = "INPUT/DATA"
-)
-
-mapa_espana <- sf::st_as_sf(mapa_espana)
-
-forestal_2021 <- forestal_2021 %>%
-  mutate(nombre_mapa = case_when(
-    comunidad == "Asturias, Principado de" ~ "Principado de Asturias",
-    comunidad == "Balears, Illes" ~ "Islas Baleares",
-    comunidad == "Canarias" ~ "Islas Canarias",
-    comunidad == "Castilla - La Mancha" ~ "Castilla-La Mancha",
-    comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
-    comunidad == "Madrid, Comunidad de" ~ "Comunidad de Madrid",
-    comunidad == "Murcia, Región de" ~ "Región de Murcia",
-    comunidad == "Navarra, Comunidad Foral de" ~ "Comunidad Foral de Navarra",
-    comunidad == "Rioja, La" ~ "La Rioja",
-    comunidad == "Ceuta" ~ "Ceuta y Melilla",
-    comunidad == "Melilla" ~ "Ceuta y Melilla",
-    TRUE ~ comunidad
-  ))
+ggplot(mapa_final) +
+  geom_sf(aes(fill = superficie_forestal), color = "white", linewidth = 0.3) +
+  scale_fill_gradient(
+    low = "lightgreen",
+    high = "darkgreen",
+    na.value = "grey90",
+    name = "Superficie forestal (%)"
+  ) +
+  labs(
+    title = "Distribución de la superficie forestal en España",
+    subtitle = "Por comunidades autónomas, 2018"
+  ) +
+  theme_minimal()
 ```
-
 
 
 ### Prevalencia de transtornos mentales por comunidades autónomas

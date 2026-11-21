@@ -1,0 +1,254 @@
+---
+title: "Superficie forestal y trastornos mentales en las Comunidades Autónomas de España"
+output: html_document
+date: "2026-10-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+Los trastornos mentales constituyen uno de los principales retos de salud pública en la actualidad. Problemas como la depresión, la ansiedad y otros trastornos psicológicos afectan a millones de personas en todo el mundo, generando consecuencias importantes tanto a nivel individual como social. La aparición de estos trastornos depende de múltiples factores biológicos, sociales, económicos y ambientales, por lo que su estudio requiere un enfoque multidisciplinar.
+
+En los últimos años ha aumentado el interés científico por comprender la influencia que los espacios naturales pueden ejercer sobre la salud mental. Diversas investigaciones sugieren que la exposición frecuente a entornos naturales puede contribuir a la reducción de los niveles de estrés, mejorar la capacidad de recuperación psicológica y favorecer el bienestar general de la población. Entre los posibles mecanismos implicados destacan la disminución de la exposición a factores estresantes propios de los entornos urbanos, la mejora de la calidad ambiental y la promoción de estilos de vida más saludables.
+
+España presenta una gran diversidad territorial en cuanto a la distribución de espacios naturales. Algunas Comunidades Autónomas poseen una elevada proporción de superficie forestal, mientras que otras cuentan con una presencia considerablemente menor de este tipo de ecosistemas. Estas diferencias ofrecen una oportunidad interesante para analizar si existe alguna asociación entre la disponibilidad de espacios naturales y determinados indicadores relacionados con la salud mental.
+
+En este contexto, el presente trabajo tiene como finalidad estudiar la posible relación entre el porcentaje de superficie forestal de las Comunidades Autónomas españolas y la prevalencia de diagnóstico de trastorno mental a lo largo de la vida. Además, se analizarán las diferencias observadas entre hombres y mujeres con el objetivo de determinar si el sexo puede influir en los patrones detectados. Mediante el uso de datos procedentes de fuentes oficiales, se pretende explorar si una mayor disponibilidad de espacios forestales podría estar asociada con una menor prevalencia de trastornos mentales en la población española.
+
+
+## Objetivos
+
+### Objetivo General
+
+Investigar la posible asociación entre el porcentaje de superficie forestal y la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas de España, con el fin de analizar si una mayor presencia de espacios naturales puede estar relacionada con mejores indicadores de salud mental. Asimismo, se evaluarán las diferencias observadas entre hombres y mujeres para determinar si el sexo influye en los patrones identificados y en la distribución territorial de los trastornos mentales.
+
+
+### Objetivos Específicos
+
+Describir la distribución de la superficie forestal en las Comunidades Autónomas de España.
+
+- Analizar la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas españolas, comparando las diferencias entre hombres y mujeres.
+
+- Estudiar la posible relación entre la superficie forestal y la prevalencia de trastorno mental.
+
+- Identificar patrones territoriales y posibles excepciones a la tendencia observada.
+
+## Metodología
+
+### Fuentes de datos
+
+<<<<<<< HEAD
+### Obtención de los datos
+
+=======
+Para el desarrollo de este estudio se han utilizado dos fuentes principales de información, ambas relacionadas con el ámbito medioambiental y la salud pública en España. La combinación de estos conjuntos de datos permite explorar posibles asociaciones entre las características ambientales de las Comunidades Autónomas y determinados indicadores de salud mental, considerando también las diferencias existentes entre hombres y mujeres.
+
+#### Datos sobre superficie forestal
+
+La información medioambiental se ha obtenido del **Instituto Nacional de Estadística (INE)**, concretamente del indicador *«Superficie forestal como porcentaje de la superficie total, por comunidades autónomas»*, correspondiente a los indicadores de seguimiento de los Objetivos de Desarrollo Sostenible (ODS).
+
+Este indicador expresa el porcentaje del territorio de cada Comunidad Autónoma ocupado por superficie forestal respecto a su superficie total. Se utilizará como medida de caracterización ambiental para comparar la presencia de áreas forestales entre los distintos territorios españoles.
+
+#### Datos sobre salud mental
+
+Los datos sanitarios proceden del estudio *«Salud mental en España y diferencias por sexo y por comunidades autónomas»*, basado en los resultados de la **Encuesta Nacional de Salud de España de 2017**.
+
+Para este trabajo se ha seleccionado el indicador de diagnóstico de trastorno mental a lo largo de la vida, expresado como porcentaje de población. Esta variable permite estudiar la distribución territorial de las personas que declaran haber recibido un diagnóstico de trastorno mental por parte de un profesional sanitario.
+
+Además, los resultados se encuentran desagregados por sexo, diferenciando entre hombres y mujeres. Esta clasificación permitirá examinar las posibles diferencias entre ambos grupos y explorar si los patrones territoriales observados presentan comportamientos distintos según el sexo.
+
+La utilización conjunta de ambas fuentes proporciona una base de datos que permite estudiar la posible asociación entre la superficie forestal y la prevalencia del diagnóstico de trastorno mental en las Comunidades Autónomas españolas.
+### Obtención de los datos
+
+Una vez identificadas las fuentes de información necesarias para el estudio, se procedió a la recopilación de los conjuntos de datos correspondientes a las variables medioambientales y sanitarias.
+
+#### Datos de superficie forestal
+
+Los datos relativos a la superficie forestal se descargaron en formato Excel desde el portal estadístico del Instituto Nacional de Estadística (INE). El archivo contiene el indicador de superficie forestal como porcentaje de la superficie total, desglosado por Comunidades Autónomas y presentado para diferentes años.
+
+Para este estudio se seleccionaron los registros correspondientes al año 2018, que incluyen las distintas Comunidades Autónomas y Ciudades Autónomas españolas. Posteriormente, se utilizaron las funciones del paquete `readxl` para importar el archivo en R y acceder a la información necesaria para el análisis.
+
+#### Datos de diagnóstico de trastorno mental
+
+La información sanitaria se obtuvo de la publicación científica basada en la Encuesta Nacional de Salud de España de 2017, disponible en formato PDF.
+
+A partir de las tablas incluidas en dicha publicación, se extrajeron los porcentajes correspondientes al diagnóstico de trastorno mental a lo largo de la vida, diferenciados por Comunidad Autónoma y sexo. Se recopilaron tanto los valores totales como los correspondientes a hombres y mujeres, con el propósito de conservar todas las dimensiones necesarias para el estudio.
+
+Debido a que esta información se encontraba presentada en formato tabular dentro de un documento PDF, fue necesario realizar una extracción de los valores y organizarlos posteriormente en una estructura tabular que permitiera su procesamiento mediante R.
+
+#### Organización inicial de los datos
+
+Una vez recopilada la información de ambas fuentes, los datos se organizaron en conjuntos independientes, manteniendo inicialmente la estructura original de cada fuente.
+
+Esta organización permitió disponer de dos tablas diferenciadas: una correspondiente a los indicadores de superficie forestal y otra relativa a los indicadores de salud mental. Ambas servirán como base para los posteriores procesos de exploración, limpieza, transformación e integración de los datos.
+
+
+### Preparación y tratamiento de los datos
+
+#### Cargamos las librerías
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+#### Importamos los datos de superficie forestal
+```{r}
+Superficie_forestal <- read_excel(
+  "INPUT/DATA/Superficie Forestal (%).xlsx",
+  skip = 28,
+  col_names = FALSE
+)
+```
+
+#### Seleccionamos las comunidades autónomas
+```{r}
+forestal_2018 <- Superficie_forestal %>%
+  slice(2:20) %>%
+  select(1:2) %>%
+  rename(
+    comunidad = ...1,
+    superficie_forestal = ...2
+  )
+```
+
+#### Limpiamos los nombres de las comunidades
+```{r}
+forestal_2018 <- forestal_2018 %>%
+  mutate(
+    comunidad = trimws(comunidad),
+    comunidad = sub("^[0-9]+ ", "", comunidad),
+    superficie_forestal = as.numeric(superficie_forestal)
+  )
+```
+
+#### Comprobamos el resultado
+```{r}
+forestal_2018
+```
+
+
+#### Obtenemos los datos geográficos de España
+```{r}
+library(sf)
+library(geodata)
+
+mapa_espana <- geodata::gadm(
+  country = "ESP",
+  level = 1,
+  path = "INPUT/DATA"
+)
+
+mapa_espana <- sf::st_as_sf(mapa_espana)
+```
+#### Comprobamos los nombres de las comunidades autónomas
+```{r}
+unique(mapa_espana$NAME_1)
+```
+
+#### Adaptamos los nombres de las comunidades autónomas
+```{r}
+forestal_2018 <- forestal_2018 %>%
+  mutate(nombre_mapa = case_when(
+    comunidad == "Asturias, Principado de" ~ "Principado de Asturias",
+    comunidad == "Balears, Illes" ~ "Islas Baleares",
+    comunidad == "Canarias" ~ "Islas Canarias",
+    comunidad == "Castilla - La Mancha" ~ "Castilla-La Mancha",
+    comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+    comunidad == "Madrid, Comunidad de" ~ "Comunidad de Madrid",
+    comunidad == "Murcia, Región de" ~ "Región de Murcia",
+    comunidad == "Navarra, Comunidad Foral de" ~ "Comunidad Foral de Navarra",
+    comunidad == "Rioja, La" ~ "La Rioja",
+    comunidad == "Ceuta" ~ "Ceuta y Melilla",
+    comunidad == "Melilla" ~ "Ceuta y Melilla",
+    TRUE ~ comunidad
+  ))
+```
+
+#### Unimos los datos forestales con los datos geográficos
+```{r}
+mapa_final <- mapa_espana %>%
+  left_join(forestal_2018, by = c("NAME_1" = "nombre_mapa"))
+```
+
+#### Comprobamos la unión de los datos
+```{r}
+mapa_final %>%
+  st_drop_geometry() %>%
+  select(NAME_1, superficie_forestal)
+```
+
+
+## Resultados
+
+### Distribución de la superficie forestal
+
+En primer lugar, vamos a analizar la distribución de la superficie forestal en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales existentes. Para ello, se representarán gráficamente los datos de superficie forestal, permitiendo comparar los valores registrados en cada comunidad autónoma.
+
+```{r}
+library(dplyr)
+
+forestal_2021 <- Superficie_forestal_ %>%
+  slice(3:21) %>%
+  rename(
+    comunidad = ...1,
+    superficie_forestal = ...2
+  )
+
+forestal_2021 <- forestal_2021 %>%
+  mutate(comunidad = sub("^[0-9]+ ", "", comunidad))
+
+library(sf)
+library(ggplot2)
+
+library(geodata)
+
+mapa_espana <- geodata::gadm(
+  country = "ESP",
+  level = 1,
+  path = "INPUT/DATA"
+)
+
+mapa_espana <- sf::st_as_sf(mapa_espana)
+
+forestal_2021 <- forestal_2021 %>%
+  mutate(nombre_mapa = case_when(
+    comunidad == "Asturias, Principado de" ~ "Principado de Asturias",
+    comunidad == "Balears, Illes" ~ "Islas Baleares",
+    comunidad == "Canarias" ~ "Islas Canarias",
+    comunidad == "Castilla - La Mancha" ~ "Castilla-La Mancha",
+    comunidad == "Comunitat Valenciana" ~ "Comunidad Valenciana",
+    comunidad == "Madrid, Comunidad de" ~ "Comunidad de Madrid",
+    comunidad == "Murcia, Región de" ~ "Región de Murcia",
+    comunidad == "Navarra, Comunidad Foral de" ~ "Comunidad Foral de Navarra",
+    comunidad == "Rioja, La" ~ "La Rioja",
+    comunidad == "Ceuta" ~ "Ceuta y Melilla",
+    comunidad == "Melilla" ~ "Ceuta y Melilla",
+    TRUE ~ comunidad
+  ))
+```
+
+
+
+### Prevalencia de transtornos mentales por comunidades autónomas
+
+A continuación, se analiza la prevalencia de trastornos mentales en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales y entre sexos. Para ello, se representarán gráficamente los datos disponibles, permitiendo comparar los valores registrados en cada comunidad autónoma y observar las posibles diferencias entre hombres y mujeres.
+
+### Relación entre superficie forestal y salud mental
+
+Posteriormente, se estudia la posible relación entre la superficie forestal y la prevalencia de trastornos mentales en las comunidades autónomas de España, con el objetivo de determinar si existe alguna asociación entre ambas variables. Para ello, se compararán gráficamente los datos obtenidos, permitiendo identificar posibles tendencias y analizar si una mayor superficie forestal se relaciona con una mayor o menor prevalencia de trastornos mentales.
+
+### Patrones territoriales y posibles excepciones
+
+Por último, se examinan los patrones territoriales observados en la relación entre la superficie forestal y la prevalencia de trastornos mentales, con el objetivo de identificar posibles excepciones a la tendencia general. Para ello, se analizarán las diferencias entre comunidades autónomas, prestando especial atención a aquellas que presenten valores alejados del comportamiento observado en el conjunto de los datos.
+
+
+## Conclusiones 
+
+
+## Referencias
+
+
+
+
