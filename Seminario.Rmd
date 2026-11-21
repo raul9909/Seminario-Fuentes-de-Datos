@@ -201,6 +201,39 @@ length(Transtorno_mental_pdf)
 cat(Transtorno_mental_pdf[[5]])
 ```
 
+#### Importamos y Organisamos los datos según el sexo
+
+```{r}
+sexo_2017 <- tibble(
+  comunidad = c(
+    "Andalucía", "Aragón", "Asturias", "Canarias",
+    "Cantabria", "Castilla-La Mancha", "Castilla y León",
+    "Cataluña", "Comunidad Valenciana", "Extremadura",
+    "Galicia", "Islas Baleares", "Madrid", "Murcia",
+    "Navarra", "País Vasco", "La Rioja", "Ceuta y Melilla",
+    "España"
+  ),
+  diagnostico_hombres = c(
+    10.3, 5.9, 16.6, 10.2, 9.3, 9.1, 10.5, 10.1, 9.4,
+    6.4, 13.7, 8.3, 6.3, 11.6, 14.4, 10.8, 8.6, 3.1, 9.7
+  ),
+  diagnostico_mujeres = c(
+    21.8, 18.7, 32.3, 16.8, 17.4, 21.9, 20.2, 21.0, 21.5,
+    16.2, 28.4, 13.7, 16.1, 18.8, 21.3, 18.9, 18.5, 13.0, 20.2
+  )
+)
+```
+
+#### Comprobamos los datos según el sexo
+
+```{r}
+sexo_2017
+
+str(sexo_2017)
+
+dim(sexo_2017)
+```
+print(sexo_2017, n = 19)
 
 ## Resultados
 
