@@ -360,6 +360,62 @@ ggplot(mapa_mental) +
   )
 ```
 
+# Comparación del diagnóstico de trastorno mental según el sexo
+
+Para comparar la prevalencia del diagnóstico de trastorno mental entre hombres y mujeres, se ha elaborado un gráfico de barras agrupadas que representa los porcentajes correspondientes a cada comunidad autónoma. Esta representación permite identificar las diferencias entre ambos sexos y observar la distribución territorial de los diagnósticos
+
+sexo_grafico <- sexo_2017 %>%
+  filter(comunidad != "España") %>%
+  pivot_longer(
+    cols = c(diagnostico_hombres, diagnostico_mujeres),
+    names_to = "sexo",
+    values_to = "prevalencia"
+  ) %>%
+  mutate(
+    sexo = recode(
+      sexo,
+      diagnostico_hombres = "Hombres",
+      diagnostico_mujeres = "Mujeres"
+    )
+  )
+
+# Representación gráfica
+
+ggplot(sexo_grafico,
+       aes(x = comunidad, y = prevalencia, fill = sexo)) +
+
+  geom_col(
+    position = position_dodge(width = 0.8),
+    width = 0.7
+  ) +
+
+  coord_flip() +
+
+  scale_fill_manual(
+    values = c(
+      "Hombres" = "steelblue",
+      "Mujeres" = "indianred"
+    )
+  ) +
+
+  labs(
+    title = "Diagnóstico de trastorno mental según el sexo",
+    subtitle = "Comparación por comunidades autónomas de España",
+    x = "Comunidad autónoma",
+    y = "Diagnóstico de trastorno mental (%)",
+    fill = "Sexo"
+  ) +
+
+  theme_minimal() +
+
+  theme(
+    plot.title = element_text(
+      face = "bold",
+      size = 14
+    ),
+    axis.text.y = element_text(size = 9),
+    legend.position = "bottom"
+  )
 
 ### Relación entre superficie forestal y salud mental
 
@@ -368,6 +424,8 @@ Posteriormente, se estudia la posible relación entre la superficie forestal y l
 ### Patrones territoriales y posibles excepciones
 
 Por último, se examinan los patrones territoriales observados en la relación entre la superficie forestal y la prevalencia de trastornos mentales, con el objetivo de identificar posibles excepciones a la tendencia general. Para ello, se analizarán las diferencias entre comunidades autónomas, prestando especial atención a aquellas que presenten valores alejados del comportamiento observado en el conjunto de los datos.
+
+
 
 
 ## Conclusiones 
