@@ -360,7 +360,7 @@ ggplot(mapa_mental) +
   )
 ```
 
-# Comparación del diagnóstico de trastorno mental según el sexo
+### Comparación del diagnóstico de trastorno mental según el sexo
 
 Para comparar la prevalencia del diagnóstico de trastorno mental entre hombres y mujeres, se ha elaborado un gráfico de barras agrupadas que representa los porcentajes correspondientes a cada comunidad autónoma. Esta representación permite identificar las diferencias entre ambos sexos y observar la distribución territorial de los diagnósticos
 
@@ -379,7 +379,7 @@ sexo_grafico <- sexo_2017 %>%
     )
   )
 
-# Representación gráfica
+### Representación gráfica
 
 ggplot(sexo_grafico,
        aes(x = comunidad, y = prevalencia, fill = sexo)) +
@@ -420,6 +420,54 @@ ggplot(sexo_grafico,
 ### Relación entre superficie forestal y salud mental
 
 Posteriormente, se estudia la posible relación entre la superficie forestal y la prevalencia de trastornos mentales en las comunidades autónomas de España, con el objetivo de determinar si existe alguna asociación entre ambas variables. Para ello, se compararán gráficamente los datos obtenidos, permitiendo identificar posibles tendencias y analizar si una mayor superficie forestal se relaciona con una mayor o menor prevalencia de trastornos mentales.
+
+#### Unimos los datos de superficie forestal y salud mental
+
+datos_relacion <- mapa_final %>%
+  sf::st_drop_geometry() %>%
+  select(NAME_1, superficie_forestal) %>%
+  inner_join(
+    mapa_mental %>%
+      sf::st_drop_geometry() %>%
+      select(NAME_1, total),
+    by = "NAME_1"
+  ) %>%
+  filter(!is.na(superficie_forestal), !is.na(total))
+
+#### Comprobamos los datos
+datos_relacion
+
+#### Gráfico de dispersión: superficie forestal y salud mental
+
+ggplot(datos_relacion,
+       aes(x = superficie_forestal, y = total)) +
+
+  geom_point(
+    color = "darkgreen",
+    size = 3,
+    alpha = 0.8
+  ) +
+
+  geom_smooth(
+    method = "lm",
+    color = "red",
+    se = TRUE
+  ) +
+
+  labs(
+    title = "Relación entre superficie forestal y salud mental",
+    subtitle = "Comunidades autónomas de España",
+    x = "Superficie forestal (%)",
+    y = "Diagnóstico de trastorno mental (%)"
+  ) +
+
+  theme_minimal()
+  
+  A partir del gráfico de dispersión, se observa una tendencia ligeramente positiva entre el porcentaje de superficie forestal y la prevalencia del diagnóstico de trastorno mental en las comunidades autónomas de España. Sin embargo, los puntos presentan una dispersión considerable, lo que indica que las diferencias territoriales no siguen un patrón claramente definido.
+
+Además, se observa que algunas comunidades autónomas con una elevada proporción de superficie forestal también presentan porcentajes relativamente altos de diagnóstico de trastorno mental. Por tanto, los resultados no muestran una asociación visual negativa entre ambas variables, como inicialmente podría esperarse.
+
+En conjunto, la representación gráfica sugiere que una mayor superficie forestal no está necesariamente relacionada con una menor prevalencia de diagnósticos de trastornos mentales. No obstante, esta observación debe interpretarse con cautela, ya que la salud mental depende de múltiples factores sociales, económicos, demográficos y ambientales que no se han considerado en este análisis.
 
 ### Patrones territoriales y posibles excepciones
 
