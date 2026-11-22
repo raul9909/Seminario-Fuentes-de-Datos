@@ -86,7 +86,9 @@ Esta organización permitió disponer de dos tablas diferenciadas: una correspon
 
 ### Preparación y tratamiento de los datos
 
+
 #### Cargamos las librerías
+
 ```{r}
 library(tidyverse)
 library(readxl)
@@ -113,7 +115,9 @@ summary(Superficie_forestal)
 dim(Superficie_forestal)
 ```
 
+
 #### Seleccionamos las comunidades autónomas
+
 ```{r}
 forestal_2018 <- Superficie_forestal %>%
   slice(2:20) %>%
@@ -124,7 +128,9 @@ forestal_2018 <- Superficie_forestal %>%
   )
 ```
 
+
 #### Limpiamos los nombres de las comunidades
+
 ```{r}
 forestal_2018 <- forestal_2018 %>%
   mutate(
@@ -134,13 +140,16 @@ forestal_2018 <- forestal_2018 %>%
   )
 ```
 
+
 #### Comprobamos el resultado
+
 ```{r}
 forestal_2018
 ```
 
 
 #### Obtenemos los datos geográficos de España
+
 ```{r}
 library(sf)
 library(geodata)
@@ -153,12 +162,15 @@ mapa_espana <- geodata::gadm(
 
 mapa_espana <- sf::st_as_sf(mapa_espana)
 ```
+
 #### Comprobamos los nombres de las comunidades autónomas
+
 ```{r}
 unique(mapa_espana$NAME_1)
 ```
 
 #### Adaptamos los nombres de las comunidades autónomas
+
 ```{r}
 forestal_2018 <- forestal_2018 %>%
   mutate(nombre_mapa = case_when(
@@ -177,7 +189,9 @@ forestal_2018 <- forestal_2018 %>%
   ))
 ```
 
+
 #### Unimos los datos forestales con los datos geográficos
+
 ```{r}
 mapa_final <- mapa_espana %>%
   left_join(forestal_2018, by = c("NAME_1" = "nombre_mapa"))
@@ -204,6 +218,7 @@ cat(Trastorno_mental_pdf[[5]])
 ```
 
 #### Seleccionamos los datos de trastornos mentales
+
 ```{r}
 library(pdftools)
 
@@ -312,13 +327,18 @@ str(sexo_2017)
 
 dim(sexo_2017)
 ```
+```{r}
 print(sexo_2017, n = 19)
+```
+
 
 ## Resultados
 
 ### Distribución de la superficie forestal
 
 En primer lugar, vamos a analizar la distribución de la superficie forestal en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales existentes. Para ello, se representarán gráficamente los datos de superficie forestal, permitiendo comparar los valores registrados en cada comunidad autónoma.
+
+#### Representación gráfica (Mapa temático)
 
 ```{r}
 library(ggplot2)
@@ -343,6 +363,8 @@ ggplot(mapa_final) +
 
 A continuación, se analiza la prevalencia de trastornos mentales en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales y entre sexos. Para ello, se representarán gráficamente los datos disponibles, permitiendo comparar los valores registrados en cada comunidad autónoma y observar las posibles diferencias entre hombres y mujeres.
 
+#### Representación gráfica (Mapa temático)
+
 ```{r}
 library(ggplot2)
 
@@ -365,10 +387,13 @@ ggplot(mapa_mental) +
   )
 ```
 
-### Comparación del diagnóstico de trastorno mental según el sexo
+### Comparación del porcentaje de diagnósticos de trastorno mental según el sexo
 
 Para comparar la prevalencia del diagnóstico de trastorno mental entre hombres y mujeres, se ha elaborado un gráfico de barras agrupadas que representa los porcentajes correspondientes a cada comunidad autónoma. Esta representación permite identificar las diferencias entre ambos sexos y observar la distribución territorial de los diagnósticos
 
+#### Reorganizamos los datos de diagnóstico según el sexo
+
+```{r}
 sexo_grafico <- sexo_2017 %>%
   filter(comunidad != "España") %>%
   pivot_longer(
@@ -383,9 +408,11 @@ sexo_grafico <- sexo_2017 %>%
       diagnostico_mujeres = "Mujeres"
     )
   )
+```
 
-### Representación gráfica
+#### Representación gráfica (Gráfico de barras)
 
+```{r}
 ggplot(sexo_grafico,
        aes(x = comunidad, y = prevalencia, fill = sexo)) +
 
@@ -421,6 +448,7 @@ ggplot(sexo_grafico,
     axis.text.y = element_text(size = 9),
     legend.position = "bottom"
   )
+```
 
 ### Relación entre superficie forestal y salud mental
 
@@ -428,7 +456,6 @@ Posteriormente, se estudia la posible relación entre la superficie forestal y l
 
 #### Unimos los datos de superficie forestal y salud mental
 ```{r}
-
 datos_relacion <- mapa_final %>%
   sf::st_drop_geometry() %>%
   select(NAME_1, superficie_forestal) %>%
@@ -439,11 +466,12 @@ datos_relacion <- mapa_final %>%
     by = "NAME_1"
   ) %>%
   filter(!is.na(superficie_forestal), !is.na(total))
-```
-#### Comprobamos los datos
-datos_relacion
 
-#### Gráfico de dispersión: superficie forestal y salud mental
+datos_relacion
+```
+
+#### Representación gráfica (Gráfico de dispersión)
+
 ```{r}
 ggplot(datos_relacion,
        aes(x = superficie_forestal, y = total)) +
@@ -468,11 +496,10 @@ ggplot(datos_relacion,
   ) +
 
   theme_minimal()
-
 ```
   
   
-  A partir del gráfico de dispersión, se observa una tendencia ligeramente positiva entre el porcentaje de superficie forestal y la prevalencia del diagnóstico de trastorno mental en las comunidades autónomas de España. Sin embargo, los puntos presentan una dispersión considerable, lo que indica que las diferencias territoriales no siguen un patrón claramente definido.
+A partir del gráfico de dispersión, se observa una tendencia ligeramente positiva entre el porcentaje de superficie forestal y la prevalencia del diagnóstico de trastorno mental en las comunidades autónomas de España. Sin embargo, los puntos presentan una dispersión considerable, lo que indica que las diferencias territoriales no siguen un patrón claramente definido.
 
 Además, se observa que algunas comunidades autónomas con una elevada proporción de superficie forestal también presentan porcentajes relativamente altos de diagnóstico de trastorno mental. Por tanto, los resultados no muestran una asociación visual negativa entre ambas variables, como inicialmente podría esperarse.
 
@@ -482,14 +509,64 @@ En conjunto, la representación gráfica sugiere que una mayor superficie forest
 
 Por último, se examinan los patrones territoriales observados en la relación entre la superficie forestal y la prevalencia de trastornos mentales, con el objetivo de identificar posibles excepciones a la tendencia general. Para ello, se analizarán las diferencias entre comunidades autónomas, prestando especial atención a aquellas que presenten valores alejados del comportamiento observado en el conjunto de los datos.
 
+#### Representación gráfica (Gráfico de residuos)
 
+```{r}
+datos_residuos <- datos_relacion %>%
+  group_by(NAME_1) %>%
+  summarise(
+    superficie_forestal = mean(superficie_forestal),
+    total = first(total),
+    .groups = "drop"
+  )
+
+modelo <- lm(total ~ superficie_forestal, data = datos_residuos)
+
+datos_residuos <- datos_residuos %>%
+  mutate(residuo = residuals(modelo))
+
+datos_residuos
+```
+
+#### Representación gráfica (Gráfico de residuos)
+
+```{r}
+ggplot(datos_residuos, aes(x = reorder(NAME_1, residuo),
+                          y = residuo,
+                          fill = residuo > 0)) +
+  geom_col() +
+  coord_flip() +
+  geom_hline(yintercept = 0, color = "black") +
+  scale_fill_manual(
+    values = c("TRUE" = "steelblue", "FALSE" = "indianred"),
+    guide = "none"
+  ) +
+  labs(
+    title = "Desviaciones respecto a la tendencia general",
+    subtitle = "Por comunidades autónomas de España",
+    x = "Comunidad autónoma",
+    y = "Residuo (puntos porcentuales)"
+  ) +
+  theme_minimal()
+```
+
+Como podemos observar, el gráfico muestra las desviaciones de cada comunidad autónoma respecto a la tendencia general entre la superficie forestal y el diagnóstico de trastornos mentales. Las barras azules representan valores superiores a los estimados, mientras que las rojas indican valores inferiores. En conjunto, se observan diferencias entre comunidades autónomas, lo que sugiere que la superficie forestal por sí sola no explica completamente las variaciones en los diagnósticos de trastornos mentales.
 
 
 ## Conclusiones 
 
+Los resultados obtenidos sugieren que no existe una relación clara entre una mayor superficie forestal y una mejor salud mental en las comunidades autónomas de España. Por tanto, no podemos afirmar que los territorios con mayor proporción de superficie forestal presenten necesariamente un menor porcentaje de diagnósticos de trastornos mentales.
+
+Además, las diferencias observadas entre comunidades autónomas muestran que esta relación no sigue un patrón uniforme, por lo que no es posible establecer una conclusión general aplicable a todos los territorios.
+
+En definitiva, aunque los espacios naturales pueden aportar beneficios para el bienestar de las personas, los resultados de nuestro análisis no permiten confirmar que una mayor superficie forestal se traduzca directamente en una mejor salud mental de la población.
+
 
 ## Referencias
 
+- **Instituto Nacional de Estadística (INE).** (2018). *Superficie forestal como porcentaje de la superficie total, por comunidades autónomas*. Indicadores de los Objetivos de Desarrollo Sostenible (ODS). https://www.ine.es/jaxi/Tabla.htm?L=0&tpx=68563
 
+- **Henares Montiel, J., Ruiz-Pérez, I. y Sordo, L.** (2020). *Salud mental en España y diferencias por sexo y por comunidades autónomas*. Gaceta Sanitaria, 34(2), 114-119. https://doi.org/10.1016/j.gaceta.2019.03.002
 
+- **GADM.** *Database of Global Administrative Areas*. Datos cartográficos de los límites administrativos de España, obtenidos mediante el paquete `geodata` de R. https://gadm.org/
 

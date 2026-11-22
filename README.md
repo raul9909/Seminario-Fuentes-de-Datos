@@ -14,7 +14,7 @@
 
 <p>&nbsp;</p>
 
-<h4>Raúl Mozo · Mohamed Lambarki · Diego Tobes</h4>
+<h4>Raúl Mozo · Mohamed Lambarki</h4>
 
 </div>
 
