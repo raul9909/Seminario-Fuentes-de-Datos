@@ -193,15 +193,89 @@ mapa_final %>%
 
 ```{r}
 
-Transtorno_mental_pdf <- pdf_text("INPUT/DATA/Transtorno Mental.pdf")
+Trastorno_mental_pdf <- pdf_text("INPUT/DATA/Transtorno Mental.pdf")
 
 # Exploración inicial
-length(Transtorno_mental_pdf)
+length(Trastorno_mental_pdf)
 
-cat(Transtorno_mental_pdf[[5]])
+cat(Trastorno_mental_pdf[[5]])
 ```
 
-#### Importamos y Organisamos los datos según el sexo
+#### Seleccionamos los datos de trastornos mentales
+
+```{r}
+library(dplyr)
+library(stringr)
+
+lineas <- strsplit(Transtorno_mental_pdf[[5]], "\n")[[1]]
+
+datos_mental <- lineas[grepl(
+  "^\\s*(Andalucía|Aragón|Asturias|Canarias|Cantabria|Castilla|Catalu|Comunidad Valenciana|Extremadura|Galicia|Islas Baleares|Madrid|Murcia|Navarra|País Vasco|La Rioja|Ceuta y Melilla|Espan)",
+  lineas
+)]
+
+datos_mental
+```
+
+#### Extraemos los porcentajes
+
+```{r}
+salud_mental_2017 <- data.frame(
+  comunidad = trimws(sub("\\s{2,}.*", "", datos_mental)),
+  total = as.numeric(sub(",", ".", str_extract_all(datos_mental, "\\d+,\\d+") |> sapply(`[`, 1))),
+  hombres = as.numeric(sub(",", ".", str_extract_all(datos_mental, "\\d+,\\d+") |> sapply(`[`, 4))),
+  mujeres = as.numeric(sub(",", ".", str_extract_all(datos_mental, "\\d+,\\d+") |> sapply(`[`, 7)))
+)
+```
+
+#### Comprobamos el resultado
+
+```{r}
+head(salud_mental_2017)
+str(salud_mental_2017)
+dim(salud_mental_2017)
+
+salud_mental_2017 <- salud_mental_2017 %>%
+  filter(comunidad != "España")
+```
+
+#### Adaptamos los nombres de las comunidades autónomas
+
+```{r}
+salud_mental_2017 <- salud_mental_2017 %>%
+  mutate(nombre_mapa = case_when(
+    comunidad == "Asturias" ~ "Principado de Asturias",
+    comunidad == "Canarias" ~ "Islas Canarias",
+    comunidad == "Castilla-La Mancha" ~ "Castilla-La Mancha",
+    comunidad == "Comunidad Valenciana" ~ "Comunidad Valenciana",
+    comunidad == "Islas Baleares" ~ "Islas Baleares",
+    comunidad == "Madrid" ~ "Comunidad de Madrid",
+    comunidad == "Murcia" ~ "Región de Murcia",
+    comunidad == "Navarra" ~ "Comunidad Foral de Navarra",
+    comunidad == "Ceuta y Melilla" ~ "Ceuta y Melilla",
+    comunidad == "Cataluña" ~ "Cataluña",
+    TRUE ~ comunidad
+  ))
+```
+
+#### Unimos los datos de trastornos mentales con los datos geográficos
+
+```{r}
+mapa_mental <- mapa_espana %>%
+  left_join(salud_mental_2017,
+            by = c("NAME_1" = "nombre_mapa"))
+```
+
+#### Comprobamos la unión de los datos
+
+```{r}
+mapa_mental %>%
+  st_drop_geometry() %>%
+  select(NAME_1, total)
+```
+
+
+#### Importamos y Organizamos los datos según el sexo
 
 ```{r}
 sexo_2017 <- tibble(
@@ -263,6 +337,29 @@ ggplot(mapa_final) +
 ### Prevalencia de transtornos mentales por comunidades autónomas
 
 A continuación, se analiza la prevalencia de trastornos mentales en las distintas comunidades autónomas de España, con el objetivo de identificar las diferencias territoriales y entre sexos. Para ello, se representarán gráficamente los datos disponibles, permitiendo comparar los valores registrados en cada comunidad autónoma y observar las posibles diferencias entre hombres y mujeres.
+
+```{r}
+library(ggplot2)
+
+ggplot(mapa_mental) +
+  geom_sf(aes(fill = total), color = "white", linewidth = 0.2) +
+  scale_fill_gradient(
+    low = "lightblue",
+    high = "darkblue",
+    name = "Diagnóstico (%)"
+  ) +
+  labs(
+    title = "Distribución de los trastornos mentales en España",
+    subtitle = "Por comunidades autónomas, 2017"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+```
+
 
 ### Relación entre superficie forestal y salud mental
 
