@@ -28,6 +28,7 @@ En este proyecto se pretende explorar la posible asociación entre la superficie
 
 Para ello, se utilizarán conjuntos de datos procedentes de fuentes estadísticas oficiales, que serán procesados y analizados mediante R y RStudio.
 
+<div style="height: 30px;"></div>
 
 ## Objetivos
 
@@ -38,6 +39,7 @@ Analizar la posible relación entre la superficie forestal y la morbilidad psíq
 - Explorar la relación entre la superficie forestal y la morbilidad psíquica
 - Evaluar el papel de la edad de la población
 
+<div style="height: 30px;"></div>
 
 ## Estructura del seminario
 
@@ -46,6 +48,7 @@ El repositorio está organizado en diferentes carpetas y archivos para facilitar
 ```text
 Seminario-Fuentes-de-Datos/
 ├── README.md
+├── README.html
 ├── Seminario.Rmd
 ├── Seminario.html
 ├── INPUT/
@@ -55,24 +58,67 @@ Seminario-Fuentes-de-Datos/
 ```
 
 - **README.md:** Presentación general del proyecto.
+- **README.html:** Versión HTML del README que presenta la información general del proyecto.
 - **Seminario.Rmd:** Desarrollo del estudio, incluyendo código, análisis y resultados.
 - **Seminario.html:** Versión final del trabajo generada mediante R Markdown.
 - **INPUT/DATA:** Conjuntos de datos utilizados.
 - **OUTPUT:** Gráficos y resultados obtenidos.
 - **Scripts:** Código auxiliar empleado durante el análisis.
 
+<div style="height: 30px;"></div>
 
 ## Resultados
 
-*Commpletar con los gráficos y resultados obtenidos durante el análisis
+<div style="height: 30px;"></div>
 
+<table width="100%" style="border-collapse: separate; border-spacing: 40px 25px;">
+  <tr>
+    <td width="48%" align="center">
+      <img src="OUTPUT/mapa_forestal.png" width="100%">
+      <p style="margin-top: 20px;"><b>Distribución de la superficie forestal</b></p>
+    </td>
+    <td width="48%" align="center">
+      <img src="OUTPUT/mapa_mental.png" width="100%">
+      <p style="margin-top: 20px;"><b>Distribución de los trastornos mentales</b></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="35"></td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="OUTPUT/comparacion_sexo.png" width="100%">
+      <p style="margin-top: 20px;"><b>Diagnóstico de trastorno mental según el sexo</b></p>
+    </td>
+    <td align="center">
+      <img src="OUTPUT/grafico_dispersion.png" width="100%">
+      <p style="margin-top: 20px;"><b>Relación entre superficie forestal y salud mental</b></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" height="35"></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center">
+      <img src="OUTPUT/grafico_residuos.png" width="55%">
+      <p style="margin-top: 20px;"><b>Desviaciones respecto a la tendencia general</b></p>
+    </td>
+  </tr>
+</table>
+
+<div style="height: 30px;"></div>
 
 ## Conclusiones
 
-*Completar una vez finalizado el análisis, breve
+Los resultados obtenidos no muestran una relación clara entre una mayor superficie forestal y una mejor salud mental en las comunidades autónomas de España. Las diferencias territoriales observadas sugieren que esta relación es compleja y que una mayor proporción de superficie forestal no implica necesariamente un menor porcentaje de diagnósticos de trastornos mentales.
 
+<div style="height: 30px;"></div>
 
 ## Acceso al seminario completo
 
-- **[Seminario.Rmd](Seminario.Rmd):**
-*Añadir el acceso al HTML cuando se finalice
+- **[Seminario.Rmd](Seminario.Rmd:)**
+- **[Seminario.html](Seminario.html:)**

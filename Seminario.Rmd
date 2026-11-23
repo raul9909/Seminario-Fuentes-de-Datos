@@ -346,6 +346,8 @@ ggplot(mapa_final) +
     theme(
       plot.title = element_text(margin = margin(b = 25))
     )
+
+ggsave("OUTPUT/mapa_forestal.png", width = 10, height = 6, dpi = 300)
 ```
 
 
@@ -375,6 +377,8 @@ ggplot(mapa_mental) +
     axis.ticks = element_blank(),
     panel.grid = element_blank()
   )
+
+ggsave("OUTPUT/mapa_mental.png", width = 10, height = 6, dpi = 300)
 ```
 
 ### Comparación del porcentaje de diagnósticos de trastorno mental según el sexo
@@ -422,7 +426,6 @@ ggplot(sexo_grafico,
 
   labs(
     title = "Diagnóstico de trastorno mental según el sexo",
-    subtitle = "Comparación por comunidades autónomas de España",
     x = "Comunidad autónoma",
     y = "Diagnóstico de trastorno mental (%)",
     fill = "Sexo"
@@ -431,13 +434,16 @@ ggplot(sexo_grafico,
   theme_minimal() +
 
   theme(
-    plot.title = element_text(
-      face = "bold",
-      size = 14
-    ),
+  plot.title = element_text(
+    face = "bold",
+    size = 14,
+    margin = margin(b = 25)
+  ),
     axis.text.y = element_text(size = 9),
     legend.position = "bottom"
   )
+
+ggsave("OUTPUT/comparacion_sexo.png", width = 10, height = 6, dpi = 300)
 ```
 
 ### Relación entre superficie forestal y salud mental
@@ -489,6 +495,8 @@ ggplot(datos_relacion,
     theme(
       plot.title = element_text(margin = margin(b = 25))
     )
+
+ggsave("OUTPUT/grafico_dispersion.png", width = 10, height = 6, dpi = 300)
 ```
 
 <div style="height: 25px;"></div>
@@ -531,17 +539,23 @@ ggplot(datos_residuos, aes(x = reorder(NAME_1, residuo),
   geom_col() +
   coord_flip() +
   geom_hline(yintercept = 0, color = "black") +
-  scale_fill_manual(
-    values = c("TRUE" = "steelblue", "FALSE" = "indianred"),
-    guide = "none"
+    scale_fill_manual(
+    values = c(
+      "TRUE" = "#75528A",
+      "FALSE" = "#D4A348"
+    )
   ) +
   labs(
     title = "Desviaciones respecto a la tendencia general",
-    subtitle = "Por comunidades autónomas de España",
     x = "Comunidad autónoma",
     y = "Residuo (puntos porcentuales)"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    plot.title = element_text(margin = margin(b = 25))
+  )
+
+ggsave("OUTPUT/grafico_residuos.png", width = 10, height = 8, dpi = 300)
 ```
 
 
