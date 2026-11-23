@@ -18,3 +18,9 @@ body {
 h1, h2, h3 {
   color: #245C38;
 }
+
+/* Separación de los títulos */
+h2, h3, h4 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
