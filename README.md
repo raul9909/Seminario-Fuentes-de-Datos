@@ -114,5 +114,5 @@ Los resultados obtenidos no muestran una relación clara entre una mayor superfi
 
 ## Acceso al seminario completo
 
-- **[Seminario.Rmd](Seminario.Rmd:)**
-- **[Seminario.html](Seminario.html:)**
+- [Seminario.Rmd](Seminario.Rmd)
+- [Seminario.html](Seminario.html)
