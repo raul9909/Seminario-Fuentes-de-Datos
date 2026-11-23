@@ -46,7 +46,9 @@ Seminario-Fuentes-de-Datos/
 ├── Seminario.Rmd
 ├── Seminario.html
 ├── INPUT/
-│   └── DATA/
+│   ├── CSS/
+│   ├── DATA/
+│   └── IMAGES/
 ├── OUTPUT/
 └── Scripts/
 ```
