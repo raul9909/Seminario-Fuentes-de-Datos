@@ -57,7 +57,9 @@ Seminario-Fuentes-de-Datos/
 - **README.html:** Versión HTML del README que presenta la información general del proyecto.
 - **Seminario.Rmd:** Desarrollo del estudio, incluyendo código, análisis y resultados.
 - **Seminario.html:** Versión final del trabajo generada mediante R Markdown.
+- **INPUT/CSS:** Archivos de estilos utilizados para la personalización.
 - **INPUT/DATA:** Conjuntos de datos utilizados.
+- **INPUT/IMAGES:** Imágenes utilizadas en el seminario.
 - **OUTPUT:** Gráficos y resultados obtenidos.
 - **Scripts:** Código auxiliar empleado durante el análisis.
 
